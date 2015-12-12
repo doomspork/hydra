@@ -1,6 +1,10 @@
 defmodule Hydra do
   use Application
 
+  def main(_args) do
+    :timer.sleep(:infinity)
+  end
+
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
