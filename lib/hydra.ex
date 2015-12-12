@@ -9,7 +9,8 @@ defmodule Hydra do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(__MODULE__, [], function: :run)
+      worker(__MODULE__, [], function: :run),
+      worker(Hydra.RouteStorage, [])
     ]
 
     opts = [strategy: :one_for_one, name: Hydra.Supervisor]
