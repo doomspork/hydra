@@ -16,6 +16,7 @@ defmodule Hydra.Mixfile do
 
   defp deps do
     [{:cowboy, "~> 1.0.0"},
-     {:plug, "~> 1.0"}]
+     {:plug, "~> 1.0"},
+     {:poison, "~> 1.5"}]
   end
 end
