@@ -16,12 +16,13 @@ defmodule Hydra.Mixfile do
   end
 
   def application do
-    [applications: [:cowboy, :logger, :plug]]
+    [applications: [:cowboy, :logger, :plug, :httpoison]]
   end
 
   defp deps do
     [{:cowboy, "~> 1.0.0"},
      {:plug, "~> 1.0"},
+     {:httpoison, "~> 0.8.0"},
      {:poison, "~> 1.5"}]
   end
 end

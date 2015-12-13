@@ -10,7 +10,8 @@ defmodule Hydra do
 
     children = [
       worker(__MODULE__, [], function: :run),
-      worker(Hydra.RouteStorage, [])
+      worker(Hydra.EndpointStorage, []),
+      supervisor(Task.Supervisor, [[name: Hydra.TaskSupervisor]])
     ]
 
     opts = [strategy: :one_for_one, name: Hydra.Supervisor]

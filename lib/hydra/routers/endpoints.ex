@@ -23,7 +23,7 @@ defmodule Hydra.Routers.Endpoints do
                  |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
                  |> new_endpoint
 
-      # TODO: Persist
+      EndpointStorage.register(endpoint)
 
       json = Poison.encode!(endpoint)
       send_resp(conn, 201, json)

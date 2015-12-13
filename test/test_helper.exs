@@ -1,3 +1,3 @@
-Hydra.EndpointStorage.start_link
+Hydra.start(nil, [])
 
-ExUnit.start()
+ExUnit.start
