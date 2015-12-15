@@ -12,11 +12,12 @@ defmodule Hydra.Mixfile do
   end
 
   def escript do
-    [main_module: Hydra]
+    [main_module: Hydra.CLI]
   end
 
   def application do
-    [applications: [:cowboy, :logger, :plug, :httpoison]]
+    [applications: [:cowboy, :logger, :plug, :httpoison],
+     mod: {Hydra, []}]
   end
 
   defp deps do
