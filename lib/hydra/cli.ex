@@ -1,4 +1,7 @@
 defmodule Hydra.CLI do
+  @moduledoc """
+  Command line interface for Hydra
+  """
 
   @ascii """
                                             ..     .

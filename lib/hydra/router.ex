@@ -1,4 +1,8 @@
 defmodule Hydra.Router do
+  @moduledoc """
+  Primary router for Hydra
+  """
+
   use Plug.Router
 
   plug Plug.Parsers, parsers: [:urlencoded, :json],

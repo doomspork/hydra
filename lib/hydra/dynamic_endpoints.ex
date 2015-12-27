@@ -1,4 +1,8 @@
 defmodule Hydra.DynamicEndpoints do
+  @moduledoc """
+  A Plug to handle our dynamic endpoints
+  """
+
   import Plug.Conn
 
   alias Hydra.EndpointStorage

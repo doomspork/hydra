@@ -1,4 +1,8 @@
 defmodule Hydra.Routers.Endpoints do
+  @moduledoc """
+  Plug Router for Endpoint management
+  """
+
   use Plug.Router
 
   alias Hydra.Endpoint

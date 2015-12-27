@@ -1,4 +1,8 @@
 defmodule Hydra.Error do
+  @moduledoc """
+  Error struct and helper methods
+  """
+
   @derive [Poison.Encoder]
   defstruct [:code, :message]
 

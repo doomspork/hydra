@@ -1,4 +1,8 @@
 defmodule Hydra.EndpointStorage do
+  @moduledoc """
+  Storage for our dynamic endpoints
+  """
+
   alias Hydra.Endpoint
 
   def start_link(_opts \\ []) do
