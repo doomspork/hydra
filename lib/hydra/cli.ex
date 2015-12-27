@@ -73,7 +73,8 @@ defmodule Hydra.CLI do
   defp update_config(args) do
     {opts, _args} = Keyword.split(args, [:ip, :port])
 
-    Application.get_env(:hydra, :cowboy)
+    :hydra
+    |> Application.get_env(:cowboy)
     |> Keyword.merge(opts)
     |> ip_tuple
   end

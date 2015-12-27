@@ -28,7 +28,9 @@ defmodule Hydra.Routers.Endpoints do
       json = Poison.encode!(endpoint)
       send_resp(conn, 201, json)
     else
-      error = Error.get_error(100)
+
+      error = 100
+              |> Error.get_error
               |> Poison.encode!
 
       send_resp(conn, 400, error)
