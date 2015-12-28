@@ -8,7 +8,8 @@ defmodule Hydra.RouterTest do
   @json_mime "application/json"
 
   def request(:get, path) do
-    conn(:get, path)
+    :get
+    |> conn(path)
     |> put_req_header("content-type", @json_mime)
     |> Router.call(@opts)
   end

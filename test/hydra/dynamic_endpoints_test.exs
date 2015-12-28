@@ -10,7 +10,8 @@ defmodule Hydra.DynamicEndpointsTest do
   @json_mime "application/json"
 
   def request(:get, path) do
-    conn(:get, path)
+    :get
+    |> conn(path)
     |> put_req_header("content-type", @json_mime)
     |> DynamicEndpoints.call(@opts)
   end
@@ -33,7 +34,8 @@ defmodule Hydra.DynamicEndpointsTest do
   end
 
   setup do
-    EndpointStorage.register(%Endpoint{path: "/dynamic", requests: ["http://localhost:9999/foo", "http://localhost:9999/bar"]})
+    EndpointStorage.register(%Endpoint{path: "/dynamic",
+                                   requests: ["http://localhost:9999/foo", "http://localhost:9999/bar"]})
 
     {:ok, pid} = Plug.Adapters.Cowboy.http(ExampleRouter, [], [port: 9999])
     on_exit(fn -> Plug.Adapters.Cowboy.shutdown(pid) end)

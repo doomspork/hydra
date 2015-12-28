@@ -10,7 +10,8 @@ defmodule Hydra.Routers.EndpointsTest do
   @json_mime "application/json"
 
   def request(:post, path, body) do
-    conn(:post, path, body)
+    :post
+    |> conn(path, body)
     |> put_req_header("content-type", @json_mime)
     |> Endpoints.call(@opts)
   end
@@ -41,4 +42,3 @@ defmodule Hydra.Routers.EndpointsTest do
     assert resp.message == "Bad request.  Malformed or missing data"
   end
 end
-

@@ -105,4 +105,3 @@ defmodule Hydra.CLI do
     "#{ip_string}:#{opts[:port]}"
   end
 end
-

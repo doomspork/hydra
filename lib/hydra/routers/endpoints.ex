@@ -46,9 +46,8 @@ defmodule Hydra.Routers.Endpoints do
   defp validate_endpoint(params) do
     params
     |> Map.keys
-    |> has_fields?
+    |> valid_fields?
   end
 
-  defp has_fields?(keys), do: Enum.all?(@required_fields, &(&1 in keys))
+  defp valid_fields?(keys), do: Enum.all?(@required_fields, &(&1 in keys))
 end
-
