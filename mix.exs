@@ -25,6 +25,7 @@ defmodule Hydra.Mixfile do
      {:plug, "~> 1.0"},
      {:httpoison, "~> 0.8.0"},
      {:poison, "~> 1.5"},
+     {:porcelain, "~> 2.0"},
      {:dogma, "~> 0.0.11", only: [:dev, :test]}]
   end
 end
