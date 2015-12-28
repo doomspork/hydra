@@ -2,6 +2,13 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :dogma,
+  rule_set: Dogma.RuleSet.All,
+
+  override: %{
+    LineLength    => [ max_length: 120 ],
+    FunctionArity => [ max: 5 ],
+  }
 
 config :hydra, :cowboy,
   port: 8080,
