@@ -14,7 +14,7 @@ defmodule Hydra.EndpointStorage do
     Agent.get(__MODULE__, fn (state) -> Map.get(state, path) end)
   end
 
-  def register(%Endpoint{} = endpoint) do
-    Agent.update(__MODULE__, fn (state) -> Map.put(state, endpoint.path, endpoint) end)
+  def register(%Endpoint{path: path} = endpoint) do
+    Agent.update(__MODULE__, fn (state) -> Map.put(state, path, endpoint) end)
   end
 end

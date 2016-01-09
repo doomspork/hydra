@@ -2,7 +2,7 @@ defmodule Hydra.DynamicEndpointsTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  alias Hydra.{DynamicEndpoints, Endpoint, EndpointStorage}
+  alias Hydra.{DynamicEndpoints, Endpoint, EndpointStorage, Request}
 
   @opts DynamicEndpoints.init([])
   @json_mime "application/json"
@@ -32,8 +32,10 @@ defmodule Hydra.DynamicEndpointsTest do
   end
 
   setup do
-    EndpointStorage.register(%Endpoint{path: "/dynamic",
-                                   requests: ["http://localhost:9999/foo", "http://localhost:9999/bar"]})
+    foo = %Request{url: "http://localhost:9999/foo"}
+    bar = %Request{url: "http://localhost:9999/bar"}
+
+    EndpointStorage.register(%Endpoint{path: "/dynamic", requests: [foo, bar]})
 
     {:ok, pid} = Plug.Adapters.Cowboy.http(ExampleRouter, [], [port: 9999])
     on_exit(fn -> Plug.Adapters.Cowboy.shutdown(pid) end)

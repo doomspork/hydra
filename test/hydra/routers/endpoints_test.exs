@@ -2,7 +2,7 @@ defmodule Hydra.Routers.EndpointsTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  alias Hydra.{Endpoint, Error, Routers.Endpoints}
+  alias Hydra.{Endpoint, Error, Request, Routers.Endpoints}
 
   @opts Endpoints.init([])
   @json_mime "application/json"
@@ -15,7 +15,7 @@ defmodule Hydra.Routers.EndpointsTest do
   end
 
   test "dispatch new endpoint" do
-    valid = %Endpoint{path: "/test", description: "a description", requests: []}
+    valid = %Endpoint{path: "/test", description: "a description", requests: [%Request{url: "http://www.example.com"}]}
             |> Poison.encode!
 
     conn = request(:post, "/", valid)

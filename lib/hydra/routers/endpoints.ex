@@ -5,10 +5,11 @@ defmodule Hydra.Routers.Endpoints do
 
   use Plug.Router
 
-  alias Hydra.{Endpoint, EndpointStorage, Error}
+  alias Hydra.{Endpoint, EndpointStorage, Error, Request}
   alias Plug.Conn
 
-  @required_fields ["path", "description", "requests"]
+  @endpoint_fields ["path", "description", "requests"]
+  @request_fields ["url"]
 
   plug Plug.Parsers, parsers: [:urlencoded, :json],
                      pass:  ["text/*"],
@@ -21,7 +22,7 @@ defmodule Hydra.Routers.Endpoints do
   match _, do: send_resp(conn, 404, "oops")
 
   defp create_endpoint(%Conn{body_params: params} = conn) do
-    if validate_endpoint(params) do
+    if request_valid?(params) do
       endpoint = params
                  |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
                  |> new_endpoint
@@ -40,13 +41,38 @@ defmodule Hydra.Routers.Endpoints do
     end
   end
 
-  defp new_endpoint(values), do: struct(Endpoint, values)
+  defp new_endpoint(params) do
+    reqs = params
+           |> Keyword.get(:requests)
+           |> Enum.map(fn (req) -> new_struct(req, Request) end)
 
-  defp validate_endpoint(params) do
     params
-    |> Map.keys
-    |> valid_fields?
+    |> Keyword.put(:requests, reqs)
+    |> new_struct(Endpoint)
   end
 
-  defp valid_fields?(keys), do: Enum.all?(@required_fields, &(&1 in keys))
+  defp new_struct(values, type) when is_map(values) do
+    values
+    |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
+    |> new_struct(type)
+  end
+  defp new_struct(values, type) do
+    struct(type, values)
+  end
+
+  defp request_valid?(params) do
+    reqs = Map.get(params, "request", [])
+    !Enum.empty?(reqs) || (valid_endpoint?(params) && Enum.all?(reqs, &valid_request?/1))
+  end
+
+  defp valid_endpoint?(params), do: validate(params, @endpoint_fields)
+  defp valid_request?(params), do: validate(params, @request_fields)
+
+  defp validate(params, fields) do
+    params
+    |> Map.keys
+    |> valid_fields?(fields)
+  end
+
+  defp valid_fields?(keys, fields), do: Enum.all?(fields, &(&1 in keys))
 end
