@@ -23,13 +23,11 @@ defmodule Hydra.Routers.Endpoints do
 
   defp create_endpoint(%Conn{body_params: params} = conn) do
     if request_valid?(params) do
-      endpoint = params
-                 |> Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
-                 |> new_endpoint
+      json = params
+             |> new_endpoint
+             |> EndpointStorage.register
+             |> Poison.encode!
 
-      EndpointStorage.register(endpoint)
-
-      json = Poison.encode!(endpoint)
       send_resp(conn, 201, json)
     else
 
@@ -43,11 +41,11 @@ defmodule Hydra.Routers.Endpoints do
 
   defp new_endpoint(params) do
     reqs = params
-           |> Keyword.get(:requests)
+           |> Map.get("requests")
            |> Enum.map(fn (req) -> new_struct(req, Request) end)
 
     params
-    |> Keyword.put(:requests, reqs)
+    |> Map.put("requests", reqs)
     |> new_struct(Endpoint)
   end
 

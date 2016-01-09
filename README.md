@@ -7,11 +7,16 @@
 
 ## Requirements
 
-1. Erlang 18
-1. Elixir 1.1
+1. Elixir 1.2
 
   ```shell
   $ brew install elixir
+  ```
+
+1. jq 1.5
+
+  ```shell
+  $ brew install jq
   ```
 
 ## Instructions
