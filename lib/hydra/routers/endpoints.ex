@@ -30,14 +30,11 @@ defmodule Hydra.Routers.Endpoints do
 
       send_resp(conn, 201, json)
     else
-
-      error = 100
-              |> Error.get_error
-              |> Poison.encode!
-
-      send_resp(conn, 400, error)
+      send_resp(conn, 400, invalid_request_error)
     end
   end
+
+  defp invalid_request_error, do: 100 |> Error.get_error |> Poison.encode!
 
   defp new_endpoint(params) do
     reqs = params
