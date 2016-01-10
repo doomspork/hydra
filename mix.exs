@@ -16,7 +16,7 @@ defmodule Hydra.Mixfile do
   end
 
   def application do
-    [applications: [:cowboy, :logger, :plug, :httpoison],
+    [applications: [:cowboy, :logger, :plug, :httpoison, :porcelain],
      mod: {Hydra, []}]
   end
 

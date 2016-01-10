@@ -3,6 +3,9 @@ defmodule Hydra.RequestPipeline do
   Pipeline for requesting, transforming, and caching data.
   """
 
+  import Hydra.Request, only: [decode!: 1, get!: 1]
+  import Hydra.Transformer, only: [transform!: 2]
+
   alias Hydra.Request
 
   def async_start(request) do
@@ -14,23 +17,11 @@ defmodule Hydra.RequestPipeline do
       nil ->
         url
         |> get!
-        |> decode!
         |> transform!(filter)
+        |> decode!
       cached -> cached
     end
   end
 
-  defp cached_request(url), do: nil
-
-  defp get!(url) do
-    case HTTPoison.get(url) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> body
-      _ -> %{}
-    end
-  end
-
-  defp decode!(body), do: body |> Poison.decode!
-
-  defp transform!(body, filter), do: body
-
+  defp cached_request(_url), do: nil
 end

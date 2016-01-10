@@ -23,17 +23,17 @@ defmodule Hydra.DynamicEndpointsTest do
     plug :dispatch
 
     get "/foo" do
-      send_resp(conn, 200, Poison.encode!(%{foo: "bar"}))
+      send_resp(conn, 200, Poison.encode!([%{foo: "bar"}]))
     end
 
     get "/bar" do
-      send_resp(conn, 200, Poison.encode!(%{bar: 42}))
+      send_resp(conn, 200, Poison.encode!([%{foo: "foo"}, %{bar: 42}]))
     end
   end
 
   setup do
-    foo = %Request{url: "http://localhost:9999/foo"}
-    bar = %Request{url: "http://localhost:9999/bar"}
+    foo = %Request{url: "http://localhost:9999/foo", resp_filter: ".[0]"}
+    bar = %Request{url: "http://localhost:9999/bar", resp_filter: ".[1]"}
 
     EndpointStorage.register(%Endpoint{path: "/dynamic", requests: [foo, bar]})
 
