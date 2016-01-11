@@ -10,6 +10,6 @@ config :dogma,
     FunctionArity => [ max: 5 ],
   }
 
-config :hydra, :cowboy,
+config :hydra, :server,
   port: 8080,
-  ip: "0.0.0.0"
+  ip: {0, 0, 0, 0}

@@ -12,7 +12,7 @@ defmodule Hydra.Mixfile do
   end
 
   def escript do
-    [main_module: Hydra.CLI]
+    [main_module: Hydra]
   end
 
   def application do
