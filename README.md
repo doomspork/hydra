@@ -19,7 +19,7 @@
   $ brew install jq
   ```
 
-## Instructions
+## Running Hydra
 
 1. Clone project:
 
@@ -40,14 +40,8 @@
   $ mix test
   ```
 
-1. Build Escript:
+1. Run Hydra:
 
   ```shell
-  $ mix escript.build
-  ```
-
-1. Run application:
-
-  ```shell
-  $ ./hydra
+  $ mix hydra
   ```
