@@ -1,4 +1,7 @@
-# Hydra
+# Hydra [![License][license-img]][license]
+
+[license-img]: https://img.shields.io/badge/license-Apache%202.0-blue.svg
+[license]: http://opensource.org/licenses/Apache-2.0
 
 > A multi-headed beast: API gateway, request cache, and data transformations.
 
