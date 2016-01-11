@@ -2,9 +2,7 @@ defmodule Hydra.Routers.EndpointsTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  alias Hydra.Endpoint
-  alias Hydra.Error
-  alias Hydra.Routers.Endpoints
+  alias Hydra.{Endpoint, Error, Routers.Endpoints}
 
   @opts Endpoints.init([])
   @json_mime "application/json"

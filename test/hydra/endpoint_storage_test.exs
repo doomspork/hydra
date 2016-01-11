@@ -1,8 +1,7 @@
 defmodule Hydra.EndpointStorageTest do
   use ExUnit.Case, async: true
 
-  alias Hydra.Endpoint
-  alias Hydra.EndpointStorage
+  alias Hydra.{Endpoint, EndpointStorage}
 
   test "basic functionality" do
     endpoint = %Endpoint{path: "/test", description: "A test"}

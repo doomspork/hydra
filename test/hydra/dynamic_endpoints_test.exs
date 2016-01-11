@@ -2,9 +2,7 @@ defmodule Hydra.DynamicEndpointsTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  alias Hydra.DynamicEndpoints
-  alias Hydra.Endpoint
-  alias Hydra.EndpointStorage
+  alias Hydra.{DynamicEndpoints, Endpoint, EndpointStorage}
 
   @opts DynamicEndpoints.init([])
   @json_mime "application/json"

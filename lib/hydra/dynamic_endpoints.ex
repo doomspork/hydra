@@ -5,8 +5,7 @@ defmodule Hydra.DynamicEndpoints do
 
   import Plug.Conn
 
-  alias Hydra.EndpointStorage
-  alias Hydra.Endpoint
+  alias Hydra.{EndpointStorage, Endpoint}
   alias Plug.Conn
 
   def init(options), do: options

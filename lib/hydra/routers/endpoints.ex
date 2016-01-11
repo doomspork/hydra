@@ -5,8 +5,7 @@ defmodule Hydra.Routers.Endpoints do
 
   use Plug.Router
 
-  alias Hydra.Endpoint
-  alias Hydra.Error
+  alias Hydra.{Endpoint, EndpointStorage, Error}
   alias Plug.Conn
 
   @required_fields ["path", "description", "requests"]
