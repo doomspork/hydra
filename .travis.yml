@@ -8,10 +8,13 @@ otp_release:
 
 env: MIX_ENV=test
 
-sudo: false # faster builds
+sudo: false
 
 notifications:
   email: false
+
+before_script:
+  - apt-get install jq
 
 script:
   - mix compile --warnings-as-errors

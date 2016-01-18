@@ -47,9 +47,9 @@ Hydra is built with Elixir 1.2 and will not work with earlier versions.  For dat
   		```shell
   		$ mix hydra
   		```
-  
+
   - Or build and run an executable with escript:
-  
+
   		```shell
   		$ mix build
   		$ ./hydra
@@ -64,7 +64,7 @@ Hydra is built with Elixir 1.2 and will not work with earlier versions.  For dat
 [1]:http://microservices.io/patterns/apigateway.html
 [2]:http://techblog.netflix.com/2012/07/embracing-differences-inside-netflix.html
 [3]:https://stedolan.github.io/jq/manual/
- 
+
 ## Contributing
 
 Contributions are always welcome.  We ask that contributors familiarize themselves with the [CONTRIBUTING.md](CONTRIBUTING.md) guide.

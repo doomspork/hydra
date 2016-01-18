@@ -1,11 +1,11 @@
-defmodule Hydra.Routers.Endpoints do
+defmodule Hydra.Router.Admin do
   @moduledoc """
-  Plug Router for Endpoint management
+  Plug Router for Route management
   """
 
   use Plug.Router
 
-  alias Hydra.{Endpoint, EndpointStorage, Error, Request}
+  alias Hydra.{Error, Request, Route, Storage}
   alias Plug.Conn
 
   @endpoint_fields ["path", "description", "requests"]
@@ -17,18 +17,22 @@ defmodule Hydra.Routers.Endpoints do
   plug :match
   plug :dispatch
 
-  post "/", do: create_endpoint(conn)
+  post "/", do: new_endpoint(conn)
 
-  match _, do: send_resp(conn, 404, "oops")
+  match _, do: send_resp(conn, 404, "Oops!")
 
-  defp create_endpoint(%Conn{body_params: params} = conn) do
+  defp new_endpoint(%Conn{body_params: params} = conn) do
     if request_valid?(params) do
-      json = params
-             |> new_endpoint
-             |> EndpointStorage.register
-             |> Poison.encode!
+      route = create_route(params)
 
-      send_resp(conn, 201, json)
+      :hydra
+      |> Application.get_env(:storage)
+      |> Keyword.get(:name)
+      |> Storage.insert(route)
+
+      Hydra.reload
+
+      send_resp(conn, 201, Poison.encode!(route))
     else
       send_resp(conn, 400, invalid_request_error)
     end
@@ -36,14 +40,14 @@ defmodule Hydra.Routers.Endpoints do
 
   defp invalid_request_error, do: 100 |> Error.get_error |> Poison.encode!
 
-  defp new_endpoint(params) do
+  defp create_route(params) do
     reqs = params
            |> Map.get("requests")
            |> Enum.map(fn (req) -> new_struct(req, Request) end)
 
     params
     |> Map.put("requests", reqs)
-    |> new_struct(Endpoint)
+    |> new_struct(Route)
   end
 
   defp new_struct(values, type) when is_map(values) do

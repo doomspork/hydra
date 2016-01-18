@@ -13,3 +13,5 @@ config :dogma,
 config :hydra, :server,
   port: 8080,
   ip: {0, 0, 0, 0}
+
+import_config "#{Mix.env}.exs"

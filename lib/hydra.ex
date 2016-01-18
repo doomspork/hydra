@@ -11,7 +11,7 @@ defmodule Hydra do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(Hydra.EndpointStorage, []),
+      worker(Hydra.Storage, [storage_opts]),
       worker(Hydra.Server, [server_opts]),
       supervisor(Task.Supervisor, [[name: Hydra.TaskSupervisor]])
     ]
@@ -20,5 +20,13 @@ defmodule Hydra do
     Supervisor.start_link(children, opts)
   end
 
-  def server_opts, do: Application.get_env(:hydra, :server)
+  @doc """
+  Recompile and load Hydra.Router
+  """
+  def reload do
+    Code.load_file("lib/hydra/router.ex")
+  end
+
+  defp server_opts, do: Application.get_env(:hydra, :server)
+  defp storage_opts, do: Application.get_env(:hydra, :storage)
 end
