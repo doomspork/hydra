@@ -1,21 +1,15 @@
 language: elixir
-
 elixir:
   - 1.2.0
-
 otp_release:
   - 18.1
-
 env: MIX_ENV=test
-
 sudo: false
-
 notifications:
   email: false
-
-before_script:
-  - apt-get install jq
-
+before_install:
+  - wget https://github.com/alco/goon/releases/download/v1.1.1/goon_linux_amd64.tar.gz
+  - tar -xf goon_linux_amd64.tar.gz
 script:
   - mix compile --warnings-as-errors
   - mix test
