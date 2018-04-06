@@ -1,22 +1,24 @@
-# Created by https://www.gitignore.io/api/vim,osx,elixir
 
-### Vim ###
-[._]*.s[a-w][a-z]
-[._]s[a-w][a-z]
-*.un~
-Session.vim
-.netrwhist
-*~
+# Created by https://www.gitignore.io/api/elixir,osx,vim
 
+### Elixir ###
+/_build
+/cover
+/deps
+/doc
+/.fetch
+erl_crash.dump
+*.ez
+*.beam
 
+### Elixir Patch ###
 ### OSX ###
-.DS_Store
+*.DS_Store
 .AppleDouble
 .LSOverride
 
 # Icon must end with two \r
 Icon
-
 
 # Thumbnails
 ._*
@@ -28,6 +30,7 @@ Icon
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -36,9 +39,17 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### Vim ###
+# swap
+.sw[a-p]
+.*.sw[a-p]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags
 
-### Elixir ###
-/ebin
-/deps
-/erl_crash.dump
-_build/
+
+# End of https://www.gitignore.io/api/elixir,osx,vim
